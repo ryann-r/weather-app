@@ -19,15 +19,31 @@
     <!-- FONTS TBD -->
     <!-- AWESOME FONT ICONS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css">
+    <!-- partly sunny/cloudy: <i class='fas fa-cloud-sun'></i> -->
 
     <!-- CSS -->
 
+    <!-- below: for flavicon error -->
+    <link rel="icon" href="data:,">
+
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <i>{{ message }}</i>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div id='root'></div>
 
+    <script type='text/jsx' src='static/js/search.jsx'></script>
     <script type='text/jsx' src='static/js/app.jsx'></script>
 
 </body>
-
 </html>
