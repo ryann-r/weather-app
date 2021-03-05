@@ -1,5 +1,3 @@
-// SEARCH
-
 function Search() {
     const [searchInput, setSearchInput] = React.useState({ city: '' });
 
@@ -19,13 +17,14 @@ function Search() {
             headers: { 'Content-Type': 'application/json' }
         })
         .then(response => response.json())
-    }
+
+        // handle error
+    };
 
 
     return (
         <form onSubmit={handleSubmit}>
             <label>
-                Search City
                 <input type="text"
                 name="city"
                 placeholder="Enter City"

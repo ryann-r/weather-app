@@ -28,6 +28,7 @@ app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/')
+@app.route('/weather-forecast')
 def index():
     """View homepage."""
 
@@ -40,19 +41,20 @@ def get_weather():
 
     if session.get('city'):
         city_name=session['city']
-
         api_key = environ.get('WEATHER_API_KEY')
-        # city_name = 'London'
         url = 'https://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(city_name, api_key)
         res = requests.get(url)
 
         weather = res.json()
+        # temp = weather['main']['temp']
+        # wind_speed = weather['wind']['speed']
 
         return jsonify({'weather': weather})
 
     else:
         flash("Please search for a city.")
         return redirect('/')
+
 
 @app.route('/api/search-input', methods=['POST', 'GET'])
 def search_input():
